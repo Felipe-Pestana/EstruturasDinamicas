@@ -1,32 +1,66 @@
-﻿var fila = new Fila();
+﻿int contador = 0;
+var filaComum = new Fila();
+var filaPref = new Fila();
 
-var p1 = new Pessoa("Felipe");
-var p2 = new Pessoa("Eric");
-var p3 = new Pessoa("Higor");
-var p4 = new Pessoa("Gabriel");
+int Menu()
+{
+	Console.WriteLine("Informe a Opção desejada: ");
+	Console.WriteLine("1 - Pegar Senha Comum");
+	Console.WriteLine("2 - Pegar Senha Preferencial");
+	Console.WriteLine("3 - Chamar Senha");
+	Console.WriteLine("0 - Sair");
+	int x = int.Parse(Console.ReadLine());
+	return x;
+}
 
-fila.InserirElemento(p1);
-//fila.MostrarFila();
+void ChamarSenha()
+{
+	if (contador < 2 && filaPref.Head is not null)
+	{
+		Console.WriteLine(filaPref.Head);
+		filaPref.RemoverElemento();
+		contador++;
+	}
+	else if (filaComum.Head is not null)
+	{
+		Console.WriteLine(filaComum.Head);
+		filaComum.RemoverElemento();
+		contador = 0;
+	}
+	else
+	{
+        Console.WriteLine("As filas estão vazias, idiota!");
+	}
+}
 
-fila.InserirElemento(p3);
-//fila.MostrarFila();
+void GerarSenha(Fila f)
+{
+	if (f.Equals(filaComum)) {
+		f.InserirElemento(new SenhaComum());
+	}
+	else { 
+		f.InserirElemento(new SenhaPreferencial());
+	}
+}
 
-fila.InserirElemento(p4);
-//fila.MostrarFila();
-
-fila.InserirElemento(p2);
-fila.MostrarFila();
-
-Console.ReadKey();
-
-fila.RemoverElemento();
-fila.MostrarFila();
-
-fila.RemoverElemento();
-fila.MostrarFila();
-
-fila.RemoverElemento();
-fila.MostrarFila();
-
-fila.RemoverElemento();
-fila.MostrarFila();
+while (true)
+{
+	switch (Menu())
+	{
+		case 1:
+			GerarSenha(filaComum);
+			break;
+		case 2:
+			GerarSenha(filaPref);
+			break;
+		case 3:
+			ChamarSenha();
+			break;
+		case 0:
+			Environment.Exit(0);
+			break;
+		default:
+            Console.WriteLine("Fez merda!");
+			break;
+	}
+}

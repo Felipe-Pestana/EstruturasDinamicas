@@ -1,7 +1,7 @@
 ﻿public class Fila
 {
-    public Pessoa Head;
-    public Pessoa Tail;
+    public Senha Head;
+    public Senha Tail;
     public int Contador;
 
     public Fila()
@@ -17,7 +17,7 @@
         return false;
     }
 
-    public void InserirElemento(Pessoa aux)
+    public void InserirElemento(Senha aux)
     {
         if (FilaVazia())
         {
@@ -48,7 +48,7 @@
 
     public void MostrarFila()
     {
-        Pessoa p = Head;
+        Senha p = Head;
 
         for (int i = 0; i <= Contador; i++)
         {
@@ -58,7 +58,7 @@
                 Console.WriteLine("Acabou a fila!");
                 break;
             }
-            Console.Write(p.Nome + " => ");
+            Console.Write(p);
             p = p.Proximo;
             //Console.WriteLine(Tail.Nome);
         }
